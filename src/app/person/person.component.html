@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="jumbotron animated fadeIn fast">
     <h4>Registrar persona</h4>
     <form (ngSubmit)="savePerson(forma)" #forma="ngForm" novalidate>
         <div class="form-group" [ngClass]="{'was-validated': name.errors?.required && name.touched }">

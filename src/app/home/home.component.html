@@ -6,7 +6,10 @@
     </div>
 
 </div>
-<table class="table table-striped">
+<div *ngIf="!persons" class="alert alert-info mt-1" role="alert">
+    No hay visitantes registrados
+</div>
+<table *ngIf="persons" class="table table-striped animated fadeIn fast">
     <thead class="thead-dark">
         <tr>
             <th scope="col">Nombre</th>
