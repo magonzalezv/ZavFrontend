@@ -1,0 +1,56 @@
+<div class="jumbotron">
+    <h4>Registrar persona</h4>
+    <form (ngSubmit)="savePerson(forma)" #forma="ngForm" novalidate>
+        <div class="form-group" [ngClass]="{'was-validated': name.errors?.required && name.touched }">
+            <label for="name">Nombre</label>
+            <input [(ngModel)]="person.name" name="name" type="text" class="form-control" id="name"
+                placeholder="Ingresa el nombre" #name="ngModel" required>
+            <div *ngIf="name.errors?.required && name.touched" class="alert alert-danger mt-1" role="alert">
+                El nombre es obligatorio
+            </div>
+        </div>
+        <div class="form-group"
+            [ngClass]="{'was-validated': (email.errors?.required || email.errors?.pattern) && email.touched }">
+            <label for="email">Correo electrónico</label>
+            <input [(ngModel)]="person.email" name="email" type="email" class="form-control" id="email"
+                placeholder="Ingresa el correo electrónico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                #email="ngModel" required>
+            <div *ngIf="email.errors?.required && email.touched" class="alert alert-danger mt-1" role="alert">
+                El email es obligatorio
+            </div>
+            <div *ngIf="email.errors?.pattern && email.touched" class="alert alert-danger mt-1" role="alert">
+                Debe proporcionar un email válido
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'was-validated': cellphone.errors?.required && cellphone.touched }">
+            <label for="cellphone">Celular</label>
+            <input [(ngModel)]="person.cellphone" name="cellphone" type="number" class="form-control" id="cellphone"
+                placeholder="Ingresa el número de celular" #cellphone="ngModel" required>
+            <div *ngIf="cellphone.errors?.required && cellphone.touched" class="alert alert-danger mt-1" role="alert">
+                El celular es obligatorio
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'was-validated': reason.errors?.required && reason.touched }">
+            <label for="reason">Motivo de visita</label>
+            <select [(ngModel)]="person.reason" name="reason" class="form-control" #reason="ngModel" required>
+                <option value="" disabled>Seleccione un motivo de visita</option>
+                <option *ngFor="let reason of REASONS" [value]="reason">{{reason}}</option>
+            </select>
+            <div *ngIf="reason.errors?.required && reason.touched" class="alert alert-danger mt-1" role="alert">
+                El motivo de la visita es obligatorio
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="comment">Comentarios</label>
+            <textarea name="comment" [(ngModel)]="person.comment" class="form-control" id="comment"
+                placeholder="Comentarios"></textarea>
+        </div>
+
+        <button [disabled]="!forma.valid" type="submit" class="btn btn-block"
+            [ngClass]="{'btn-primary': !editing, 'btn-success': editing}">
+            {{editing ? 'Actualizar visitante' : 'Registrar visitante'}}
+        </button>
+        <button routerLink="/home" class="btn btn-block btn-danger">Cancelar</button>
+    </form>
+</div>

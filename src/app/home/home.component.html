@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col text-right">
+        <button routerLink="/person" type="button" class="btn btn-primary mb-2">
+            <fa-icon [icon]="faUserPlus" class="mr-1"></fa-icon>Registrar visitante
+        </button>
+    </div>
+
+</div>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Visita</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let person of persons">
+            <td>{{person.name}}</td>
+            <td>{{person.email}}</td>
+            <td>{{person.reason}}</td>
+            <td>
+                <a routerLink="/person/{{person.id}}">
+                    <fa-icon [icon]="faEdit" class="fa-warning"></fa-icon>
+                </a>
+                <fa-icon [icon]="faTrashAlt" class=" ml-3 fa-danger" (click)="delete(person.id)"></fa-icon>
+            </td>
+        </tr>
+    </tbody>
+</table>
